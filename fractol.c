@@ -14,8 +14,15 @@ void	buddhabrot(t_fol *f)
 
 int main(int argc, char **argv)
 {
-	//args parser
-	//options printer
+	t_fol	f;
+	mlx_t	*mlx;
+
+	if (argc == 1)
+		general_instructions();
+	arg_parser(argc, argv);
+	struct_init(&f, argc, argv);
+	mlx = mlx_init();
+	// if ()
 
 	//sdl init
 	//image init

@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achatzit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/05 14:31:35 by achatzit          #+#    #+#             */
+/*   Updated: 2023/12/05 14:31:38 by achatzit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#include <cstdint>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -12,47 +23,61 @@
 # include <stdint.h>
 # include <pthread.h>
 # include "MLX42.h"
+# include "libft.h"
+#include "ft_printf.h"
+
+typedef struct s_cpx
+{
+	long double	re;
+	long double	im;
+}	t_cpx;
 
 typedef struct s_pixel
 {
 	long double	re;
 	long double	im;
-	int			iteration;
+	int		iteration;
 }	t_pixel;
 
 typedef struct s_it
 {
-    int min[3];
-    int max[3];
+    int	min[3];
+    int	max[3];
 } t_it;
-
 
 typedef struct s_buddha
 {
-	struct s_it it;
-	int ***img;
-	int i;
-	int j;
+	struct s_it	it;
+	int		***img;
+	int		i;
+	int		j;
 }	t_buddha;
 
 typedef struct s_fol
 {
 	mlx_t		*mlx;
-	mlx_image_t *image;
+	mlx_image_t	*image;
 	uint8_t		fractal_type;	
 	uint32_t	win_x;
 	uint32_t	win_y;
-	long double heig;
-	long double wid;
-	long double zoom;
+	long double	heig;
+	long double	wid;
+	long double	zoom;
 	int32_t		max_iter;
-	int			cur_color;
+	int		cur_color;
 	long double	bailout;
-	int			shift;
-	struct s_pixel pixel;
+	int		shift;
+	struct s_pixel	pixel;
 	struct s_buddha	buddha;
-	int			buddha_iters;
-	int			buddha_bailout;
+	int		buddha_iters;
+	int		buddha_bailout;
+	t_cpx		julia_consts[7];
+	int		julia_set;
 }	t_fol;
+
+void	error_and_quit(char *error_str);
+void	arg_parser(int argc, char **argv);
+void	general_instructions(void);
+void	struct_init(t_fol *f, int argc, char **argv);
 
 #endif
