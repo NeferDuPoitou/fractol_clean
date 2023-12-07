@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achatzit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:31:25 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/05 14:31:26 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:06:19 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define WIDTH 1200
-# define HEIGHT 1200
-
 # define SCALEDX_MIN -2.00
 # define SCALEDX_MAX  0.47
 # define SCALEDY_MIN -2.00
 # define SCALEDY_MAX  0.24
+# define ABS_SCALED_X 2.47
+# define ABS_SCALED_Y 2.24
+
 
 # define LSD 0
 # define VANDETTA 1
@@ -32,9 +32,9 @@
 # define G 1
 # define B 2
 
-# define RED (255 << 24 | 0 << 16 | 0 << 8 | 255)
-# define GRN (0 << 24 | 255 << 16 | 0 << 8 | 255)
-# define BLU (0 << 24 | 0 << 16 | 255 << 8 | 255)
+# define RED 0xff0000ff
+# define GRN 0x00ff00ff
+# define BLU 0x0000ffff
 
 # define MANDELBROT 0
 # define JULIA 1
