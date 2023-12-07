@@ -100,5 +100,6 @@ void	struct_init(t_fol *f, int argc, char **argv);
 long double scaled_pixel(int pixel, int type, t_fol *f);
 void	keys_actions(void *fol);
 void	fractalise(t_fol *f);
+uint32_t starrynight_palette(int iteration, t_fol *f);
 
 #endif

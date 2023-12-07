@@ -4,6 +4,13 @@
 #include "libft.h"
 #include <signal.h>
 
+
+/* int check_is_correctly_good(t_fol *f, start_x, start_y, end_x, end_y)
+{
+	int iteration = f->itermap[start_x][start_y];
+	while (++start_x < )
+}
+*/
 // int mandelcalc_and_color(int a, int b, long double scaled_x, t_fol *f)
 int mandelcalc_and_color(int a, int b, t_fol *f)
 {
@@ -12,26 +19,25 @@ int mandelcalc_and_color(int a, int b, t_fol *f)
 	long double scaled_x;
 	long double scaled_y;
 	int iteration;
+	int color;
 
-	if (f->itermap[a][b] != 0xffffffff)
+	if (f->itermap[a][b] != 0)
 			return f->itermap[a][b];
 	z.re = 0;
 	z.im = 0;
 	iteration = 0;
 	scaled_x = scaled_pixel(a, 'x', f);
 	scaled_y = scaled_pixel(b, 'y', f);
-	while (powl(z.re, 2) + powl(z.im, 2) <= 4.0 && iteration < f->max_iter)
+	while (z.re * z.re + z.im * z.im <= 4.0 && iteration < f->max_iter)
 	{
-		retmp = powl(z.re, 2) - powl(z.im, 2) + scaled_x;
+		retmp = z.re * z.re - z.im * z.im + scaled_x;
 		z.im = 2 * z.re * z.im + scaled_y;
 		z.re = retmp;
 		iteration++;
 	}
 	f->itermap[a][b] = iteration;
-	if (iteration == f->max_iter)
-		mlx_put_pixel(f->image, a, b, 0xff0000ff);
-	else
-		mlx_put_pixel(f->image, a, b, 0x00ff00ff);
+	color = starrynight_palette(iteration, f);
+	mlx_put_pixel(f->image, a, b, color);
 	return iteration;
 }
 
@@ -45,24 +51,19 @@ void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 	int y;
 	static int debug = 0;
 
-	// if (debug >= 10)
-	// 	return ;
 	flagok = 1;
 	x = start_x;
 	width = end_x - start_x;
 	height = end_y - start_y;
-		// ft_printf("%-2d : %3d %3d %3d %3d\n, isbr : %d\n", debug, start_x, start_y, end_x, end_y, isbr);
 	startiter = mandelcalc_and_color(start_x, start_y, f);
-	if (abs(height) <= 4 || abs(width) <= 4)
+	if (abs(height) <= 2 || abs(width) <= 2)
 	{
 		while (++x < end_x)
 		{
 			y = start_y;
 			while (++y < end_y)
 			{
-				// mandelcalc_and_color(x, y, f);
-				mlx_put_pixel(f->image, x, y, 0xff00ffff);
-				f->itermap[x][y] = 100;
+				f->itermap[x][y] = mandelcalc_and_color(x, y, f);
 			}
 		}
 		return ;
@@ -82,23 +83,21 @@ void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 	if (flagok == 1)
 	{
 		x = start_x - 1;
-		y = start_y + 1;
+		y = start_y - 1;
+		int color = starrynight_palette(startiter, f);
 		while (++x < end_x)
 		{
-			y = start_y;
-			while (++y < end_y - 1)
+			y = start_y - 1;
+			while (++y < end_y)
 			{
-				mlx_put_pixel(f->image, x, y, BLU);
-				f->itermap[x][y] = 100;
+				f->itermap[x][y] = startiter;
+				mlx_put_pixel(f->image, x, y, color);
 			}
 		}
 		return ;
 	}
-	// ft_printf("flagok : %d\n", flagok);
 	if (flagok == 0)
 	{
-		// debug++;
-		// ft_printf("%-2d : %3d %3d %3d %3d\n, isbr : %d\n", debug, start_x, start_y, end_x, end_y, isbr);
 		mandelboxes(start_x, start_y, (end_x + start_x) / 2, (end_y + start_y) / 2, f);
 		mandelboxes((start_x + end_x) / 2, start_y, end_x, (end_y + start_y) / 2, f);
 		mandelboxes(start_x, (start_y + end_y) / 2, (end_x + start_x) / 2, end_y, f);
@@ -123,6 +122,26 @@ void	bruteforce(t_fol *f)
 	}
 }
 
+void	last_pass(t_fol *f)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (++x < f->win_width)
+	{
+		y = 0;
+		while (++y < f->win_heigth)
+		{
+			if (f->itermap[x][y] == 0)
+			{
+				f->itermap[x][y] = mandelcalc_and_color(x, y, f);
+			}
+		}
+	}
+
+}
+
 void	mandelflood(int start_x, int start_y, int end_x, int end_y,t_fol *f)
 {
 	t_pixel px;
@@ -137,15 +156,15 @@ void	mandelflood(int start_x, int start_y, int end_x, int end_y,t_fol *f)
 	for (int i = 0; i < f->win_width; i++)
 	{
 		f->itermap[i] = calloc(f->win_heigth, sizeof(int));
-		ft_memset(f->itermap[i], 0xff, (f->win_heigth * sizeof(int)));
 	}
 	mandelboxes(start_x, start_y, end_x, end_y, f);
+	last_pass(f);
 	// bruteforce(f);
 	/* for (int i = 0; i < f->win_width; i++)
 	{
 		for(int j = 0; j < f->win_heigth; j++)
 		{
-			ft_printf("%2d", f->itermap[i][j]);
+			ft_printf("%3d", f->itermap[i][j]);
 		}
 		ft_printf("\n");
 	} */
