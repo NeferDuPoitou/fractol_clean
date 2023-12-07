@@ -32,7 +32,7 @@ static void	image_to_window(mlx_t *mlx, mlx_image_t *image, int x, int y)
 void	fractalise(t_fol *f)
 {
 	if (f->fractal_type == MANDELBROT)
-		mandelflood(0, 0, f->win_width, f->win_heigth, f);
+		mandelflood(0, 0, f->win_width - 1, f->win_heigth - 1, f);
 	else if (f->fractal_type == JULIA)
 		ft_printf("julia en construciton");
 	else if (f->fractal_type == BURNINGJULIA)
