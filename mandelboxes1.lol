@@ -13,7 +13,7 @@ int mandelcalc_and_color(int a, int b, t_fol *f)
 	long double scaled_y;
 	int iteration;
 
-	if (f->itermap[a][b] != 0xffffffff)
+	if (f->itermap[a][b] != 0)
 			return f->itermap[a][b];
 	z.re = 0;
 	z.im = 0;
@@ -29,13 +29,13 @@ int mandelcalc_and_color(int a, int b, t_fol *f)
 	}
 	f->itermap[a][b] = iteration;
 	if (iteration == f->max_iter)
-		mlx_put_pixel(f->image, a, b, 0xff0000ff);
+		mlx_put_pixel(f->image, a, b, 0x000000ff);
 	else
 		mlx_put_pixel(f->image, a, b, 0x00ff00ff);
 	return iteration;
 }
 
-void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
+void	mandelboxes(t_box *box, t_fol *f, int quadrant)
 {
 	int flagok;
 	int width;
@@ -53,7 +53,7 @@ void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 	height = end_y - start_y;
 		// ft_printf("%-2d : %3d %3d %3d %3d\n, isbr : %d\n", debug, start_x, start_y, end_x, end_y, isbr);
 	startiter = mandelcalc_and_color(start_x, start_y, f);
-	if (abs(height) <= 4 || abs(width) <= 4)
+	if (height <= 4 || width <= 4)
 	{
 		while (++x < end_x)
 		{
@@ -72,7 +72,7 @@ void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 		y = start_y;
 		while (++y < end_y)
 		{
-			if (x == start_x || x == end_x - 1 || y == start_y || y == end_y - 1)
+			if (x == start_x + 1 || x == end_x - 1 || y == start_y + 1 || y == end_y - 1)
 			{
 				if (mandelcalc_and_color(x, y, f) != startiter)
 					flagok = 0;
@@ -81,12 +81,12 @@ void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 	}
 	if (flagok == 1)
 	{
-		x = start_x - 1;
-		y = start_y + 1;
+		x = start_x;
+		y = start_y;
 		while (++x < end_x)
 		{
 			y = start_y;
-			while (++y < end_y - 1)
+			while (++y < end_y)
 			{
 				mlx_put_pixel(f->image, x, y, BLU);
 				f->itermap[x][y] = 100;
@@ -100,9 +100,9 @@ void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 		// debug++;
 		// ft_printf("%-2d : %3d %3d %3d %3d\n, isbr : %d\n", debug, start_x, start_y, end_x, end_y, isbr);
 		mandelboxes(start_x, start_y, (end_x + start_x) / 2, (end_y + start_y) / 2, f);
-		mandelboxes((start_x + end_x) / 2, start_y, end_x, (end_y + start_y) / 2, f);
-		mandelboxes(start_x, (start_y + end_y) / 2, (end_x + start_x) / 2, end_y, f);
-		mandelboxes((end_x + start_x) / 2, (end_y + start_y) / 2, end_x, end_y, f);
+		mandelboxes((start_x + end_x) / 2, start_y, end_x, end_y / 2, f);
+		mandelboxes(start_x, (start_y + end_y) / 2, end_x / 2, end_y, f);
+		mandelboxes((end_y + start_x) / 2, (end_y + start_y) / 2, end_x, end_y, f);
 	}
 }
 
@@ -126,6 +126,7 @@ void	bruteforce(t_fol *f)
 void	mandelflood(int start_x, int start_y, int end_x, int end_y,t_fol *f)
 {
 	t_pixel px;
+	t_box box;
 	int iterations;
 	int flagok;
 	int width;
@@ -133,13 +134,16 @@ void	mandelflood(int start_x, int start_y, int end_x, int end_y,t_fol *f)
 	int startiter;
 
 	px.x = 0;
+	box.tl = (t_pixel){0, 0};
+	box.tr = (t_pixel){f->win_width, 0};
+	box.bl = (t_pixel){0, f->win_heigth};
+	box.br = (t_pixel){f->win_width, f->win_heigth};
 	f->itermap = calloc(f->win_width, sizeof(int*));
 	for (int i = 0; i < f->win_width; i++)
 	{
 		f->itermap[i] = calloc(f->win_heigth, sizeof(int));
-		ft_memset(f->itermap[i], 0xff, (f->win_heigth * sizeof(int)));
 	}
-	mandelboxes(start_x, start_y, end_x, end_y, f);
+	mandelboxes(box, f, -1);
 	// bruteforce(f);
 	/* for (int i = 0; i < f->win_width; i++)
 	{

@@ -13,12 +13,12 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define SCALEDX_MIN -2.00
-# define SCALEDX_MAX  0.47
-# define SCALEDY_MIN -2.00
-# define SCALEDY_MAX  0.24
-# define ABS_SCALED_X 2.47
-# define ABS_SCALED_Y 2.24
+# define SCALEDX_MIN -1.00
+# define SCALEDX_MAX  1.00
+# define SCALEDY_MIN -1.00
+# define SCALEDY_MAX  1.00
+# define ABS_SCALED_X 2.00
+# define ABS_SCALED_Y 2.00
 
 
 # define LSD 0
@@ -57,7 +57,12 @@ Use ./fractol -h for help"
 Good Luck"
 # define BUDDHA_TOO_MANY_ARG "The buddha dont need any superfluous arguments"
 
-
+// box quadrants
+# define WHOLE_SCREEN 0
+# define QUADRANT_LT
+# define QUADRANT_LR
+# define QUADRANT_BL
+# define QUADRANT_BR
 
 
 
