@@ -48,11 +48,17 @@ typedef struct s_pixel
 
 typedef struct s_box
 {
-	t_pixel bl;
-	t_pixel br;
-	t_pixel tl;
-	t_pixel tr;
+	int	start_x;
+	int	start_y;
+	int	end_x;
+	int	end_y;
 }	t_box;
+
+typedef struct s_itercheck
+{
+	int startiter;
+	int flagok;
+}	t_itercheck;
 
 typedef struct s_it
 {
@@ -91,10 +97,10 @@ typedef struct s_fol
 	t_cpx		j_consts_static;
 	int		julia_set;
 	int		**itermap;
-	struct s_box	box;
 }	t_fol;
 
-void	mandelflood(int start_x, int start_y, int end_x, int end_y, t_fol *f);
+void	mandelflood(t_box box, t_fol *f);
+int	mandelcalc_and_color(int a, int b, t_fol *f);
 int	juliacalc_and_color(int x, int y, t_fol *f);
 int	juliacalc_and_color_static(int x, int y, t_fol *f);
 int	burningshipcalc_and_color(int x, int y, t_fol *f);

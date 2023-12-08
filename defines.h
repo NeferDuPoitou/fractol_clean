@@ -61,10 +61,10 @@ Good Luck"
 
 // box quadrants
 # define WHOLE_SCREEN 0
-# define QUADRANT_LT
-# define QUADRANT_LR
-# define QUADRANT_BL
-# define QUADRANT_BR
+# define TOP_RIGHT 1
+# define TOP_LEFT 2
+# define BOTTOM_LEFT 3
+# define BOTTOM_RIGHT 4
 
 
 

@@ -31,7 +31,10 @@ static void	image_to_window(mlx_t *mlx, mlx_image_t *image, int x, int y)
 
 void	fractalise(t_fol *f)
 {
-		mandelflood(0, 0, f->win_width - 1, f->win_heigth - 1, f);
+	t_box	box;
+
+	box = (t_box){0, 0, f->win_width - 1, f->win_heigth - 1};
+	mandelflood(box, f);
 }
 
 int main(int argc, char **argv)
