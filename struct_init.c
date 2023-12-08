@@ -26,8 +26,8 @@ void	struct_init(t_fol *f, int argc, char **argv)
 	f->zoom = 1.00;
 	f->scaled_pixel.im = 0.00;
 	f->scaled_pixel.re = 0.00;
-	f->win_width = 1200;
-	f->win_heigth = 1200;
+	f->win_width = 1600;
+	f->win_heigth = 1600;
 	f->bailout = 4.0;
 	f->max_iter = 500;
 	f->cur_color = 0;
