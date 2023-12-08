@@ -44,7 +44,7 @@ void	struct_init(t_fol *f, int argc, char **argv)
 	f->win_width = 400;
 	f->win_heigth = 400;
 	f->bailout = 4.0;
-	f->max_iter = 1000;
+	f->max_iter = 500;
 	f->cur_color = 0;
 	f->buddha.i = 0;
 	f->buddha.j = 0;

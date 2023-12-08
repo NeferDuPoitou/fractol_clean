@@ -1,4 +1,3 @@
-#include "MLX42.h"
 #include "fractol.h"
 #include "defines.h"
 
@@ -63,13 +62,9 @@
 
 uint32_t starrynight_palette(int iterations, t_fol *f)
 {
-	/* int t = iteration / f->max_iter;
-	int r = 9 * (1 - t) * pow(t, 3) * 255;
-	int g = 15 * pow((1 - t), 2) * pow(t, 2) * 255;
-	int b = 8.5 * pow((1 - t), 3) * t * 255; */
 	long double ni = (long double)iterations / (long double)f->max_iter;
-	unsigned char red = 9.0 * (1.0 - ni) * pow(ni, 3.0) * 255.0;
-	unsigned char green = 15.0 * pow((1.0 - ni), 2.0) * pow(ni, 2.0) * 255.0;
-	unsigned char blue = 8.5 * pow((1.0 - ni), 3.0) * ni * 255.0;
-	return ((red << 24)|(green << 16)|(blue << 8)|255);
+	unsigned char r = 9.0 * (1.0 - ni) * pow(ni, 3.0) * 255.0;
+	unsigned char g = 15.0 * pow((1.0 - ni), 2.0) * pow(ni, 2.0) * 255.0;
+	unsigned char b = 8.5 * pow((1.0 - ni), 3.0) * ni * 255.0;
+	return ((b << 24)|(g << 16)|(r << 8)|255);
 }
