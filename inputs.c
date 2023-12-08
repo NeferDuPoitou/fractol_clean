@@ -48,6 +48,20 @@ void	choose_color(t_fol *f)
 
 }
 
+void	burningjulia_consts(t_fol *f)
+{
+	if (mlx_is_mouse_down(f->mlx, 0))
+	{
+		int mousex;
+		int mousey;
+		
+		mlx_get_mouse_pos(f->mlx, &mousex, &mousey);
+		f->j_consts.re = scaled_pixel(mousex, 'x', f);
+		f->j_consts.im = scaled_pixel(mousey, 'y', f);
+		fractalise(f);
+	}
+}
+
 void	keys_actions(void *fol)
 {
 	t_fol *f;
@@ -65,4 +79,5 @@ void	keys_actions(void *fol)
 	zoom(f);
 	pan(f);
 	choose_color(f);
+	burningjulia_consts(f);
 }

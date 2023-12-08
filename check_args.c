@@ -42,13 +42,14 @@ static int	check_julia_const(char *julia_const_str, int type)
 static int	first_arg_validator(char *s, int argc)
 {
 	if ((ft_strcmp(s, ARG_HELP) && ft_strcmp(s, ARG_MANDEL) &&\
-	ft_strcmp(s, ARG_JULIA) && ft_strcmp(s, ARG_BURNINGJULIA) && \
+	ft_strcmp(s, ARG_JULIA) && ft_strcmp(s, ARG_BURNINGSHIP) && \
+	ft_strcmp(s, ARG_BURNINGJULIA) && \
 	ft_strcmp(s, ARG_BUDDHA)))
 		return (0);
 	return (1);
 }
 
-void	arg_parser(int argc, char **argv)
+void	arg_parser(int argc, char **argv, t_fol *f)
 {
 	if (argc == 1)
 		error_and_quit(NO_ARG);
@@ -69,5 +70,8 @@ void	arg_parser(int argc, char **argv)
 		else if (argc == 4 && !check_julia_const(argv[2], 'x') || \
 		!check_julia_const(argv[3], 'y'))
 			error_and_quit(ERR_JULIA_CONST);
+		f->julia_has_consts = 1;
 	}
+	else if (argc == 2 && !ft_strcmp(argv[1], ARG_JULIA))
+		f->julia_has_consts = 0;
 }

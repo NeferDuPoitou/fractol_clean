@@ -31,14 +31,7 @@ static void	image_to_window(mlx_t *mlx, mlx_image_t *image, int x, int y)
 
 void	fractalise(t_fol *f)
 {
-	if (f->fractal_type == MANDELBROT)
 		mandelflood(0, 0, f->win_width - 1, f->win_heigth - 1, f);
-	else if (f->fractal_type == JULIA)
-		ft_printf("julia en construciton");
-	else if (f->fractal_type == BURNINGJULIA)
-		ft_printf("burning julia en construciton");
-	else if (f->fractal_type == BUDDHA)
-		ft_printf("buddhabrot en construciton");
 }
 
 int main(int argc, char **argv)
@@ -49,7 +42,7 @@ int main(int argc, char **argv)
 
 	if (argc == 1)
 		general_instructions();
-	arg_parser(argc, argv);
+	arg_parser(argc, argv, &f);
 	struct_init(&f, argc, argv);
 	init_mlx_and_image(f, &mlx, &image);
 	f.mlx = mlx;

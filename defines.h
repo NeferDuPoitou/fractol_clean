@@ -38,12 +38,14 @@
 
 # define MANDELBROT 0
 # define JULIA 1
-# define BURNINGJULIA 2
-# define BUDDHA 3 
+# define BURNINGSHIP 2
+# define BURNINGJULIA 3
+# define BUDDHA 4
 
 # define ARG_HELP "-h"
 # define ARG_MANDEL "mandelbrot"
 # define ARG_JULIA "julia"
+# define ARG_BURNINGSHIP "burningship"
 # define ARG_BURNINGJULIA "burningjulia"
 # define ARG_BUDDHA "buddhabrot"
 

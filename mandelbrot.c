@@ -2,7 +2,6 @@
 #include "fractol.h"
 #include "defines.h"
 #include "libft.h"
-#include <signal.h>
 
 
 // int mandelcalc_and_color(int a, int b, long double scaled_x, t_fol *f)
@@ -54,6 +53,27 @@ void boxes_filter(t_fol *f,int start_x,int start_y,int end_x,int end_y)
 	}
 }
 
+
+// juliacalc_and_color(x, y, f);
+// burningshipcalc_and_color(x, y, f);
+// burningjulia_and_color(x, y, f);
+int	compute_fractal(int x, int y, t_fol *f)
+{
+	if (f->fractal_type == MANDELBROT)
+		return 	mandelcalc_and_color(x, y, f);
+	if (f->fractal_type == JULIA && f->julia_has_consts == 0)
+		return 	juliacalc_and_color(x, y, f);
+	if (f->fractal_type == JULIA && f->julia_has_consts == 1)
+		return 	juliacalc_and_color_static(x, y, f);
+	if (f->fractal_type == BURNINGSHIP)
+		return 	burningshipcalc_and_color(x, y, f);
+	if (f->fractal_type == BURNINGJULIA)
+		return 	burningjuliacalc_and_color(x, y, f);
+	// if (f->fractal_type == BUDDHA)
+		// return 	burningjulia_and_color(x, y, f);
+	return -1;
+}
+
 void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 {
 	int flagok;
@@ -70,7 +90,7 @@ void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 	x = start_x;
 	width = end_x - start_x;
 	height = end_y - start_y;
-	startiter = mandelcalc_and_color(start_x, start_y, f);
+	startiter = compute_fractal(start_x, start_y, f);
 	if (abs(height) <= 3 || abs(width) <= 3)
 	{
 		while (x < end_x)
@@ -78,7 +98,7 @@ void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 			y = start_y;
 			while (y < end_y)
 			{
-				f->itermap[x][y] = mandelcalc_and_color(x, y, f);
+				f->itermap[x][y] = compute_fractal(x, y, f);
 				// mlx_put_pixel(f->image, x, y, 0xff00ffff);
 				y++;
 			}
@@ -93,7 +113,8 @@ void	mandelboxes(int start_x, int start_y, int end_x, int end_y, t_fol *f)
 		{
 			if (x == start_x || x == end_x || y == start_y || y == end_y)
 			{
-				if (mandelcalc_and_color(x, y, f) != startiter)
+				// if (mandelcalc_and_color(x, y, f) != startiter)
+				if (compute_fractal(x, y, f) != startiter)
 					flagok = 0;
 			}
 			y++;
@@ -139,7 +160,8 @@ void	bruteforce(t_fol *f)
 		y = 0;
 		while (y < f->win_heigth)
 		{
-			mandelcalc_and_color(x, y, f);
+			// mandelcalc_and_color(x, y, f);
+			compute_fractal(x, y, f);
 			y++;
 		}
 		x++;
@@ -159,7 +181,8 @@ void	last_pass(t_fol *f)
 		{
 			if (f->itermap[x][y] == 0)
 			{
-				f->itermap[x][y] = mandelcalc_and_color(x, y, f);
+				// f->itermap[x][y] = mandelcalc_and_color(x, y, f);
+				f->itermap[x][y] = compute_fractal(x, y, f);
 				// mlx_put_pixel(f->image, x, y, 0xff00ffff);
 			}
 			y++;
@@ -167,6 +190,31 @@ void	last_pass(t_fol *f)
 		x++;
 	}
 
+}
+
+void	calloc_itermap(t_fol *f)
+{
+	int i;
+
+	i = 0;
+	f->itermap = calloc(f->win_width, sizeof(int*));
+	while (i < f->win_width)
+	{
+		f->itermap[i] = calloc(f->win_heigth, sizeof(int));
+		i++;
+	}
+}
+
+void	free_itermap(t_fol *f)
+{
+	int i = 0;
+
+	while (i < f->win_width)
+	{
+		free(f->itermap[i]);
+		i++;
+	}
+	free(f->itermap);
 }
 
 void	mandelflood(int start_x, int start_y, int end_x, int end_y,t_fol *f)
@@ -179,12 +227,15 @@ void	mandelflood(int start_x, int start_y, int end_x, int end_y,t_fol *f)
 	int startiter;
 
 	px.x = 0;
-	f->itermap = calloc(f->win_width, sizeof(int*));
+	/* f->itermap = calloc(f->win_width, sizeof(int*));
 	for (int i = 0; i < f->win_width; i++)
 	{
 		f->itermap[i] = calloc(f->win_heigth, sizeof(int));
-	}
+	} */
+	calloc_itermap(f);
 	mandelboxes(start_x, start_y, end_x, end_y, f);
+	free_itermap(f);
+
 	// last_pass(f);
 	// bruteforce(f);
 	/* for (int i = 0; i < f->win_width; i++)

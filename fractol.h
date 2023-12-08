@@ -86,15 +86,21 @@ typedef struct s_fol
 	struct s_buddha	buddha;
 	int		buddha_iters;
 	int		buddha_bailout;
-	t_cpx		julia_consts[7];
+	int		julia_has_consts;
+	t_cpx		j_consts;
+	t_cpx		j_consts_static;
 	int		julia_set;
 	int		**itermap;
 	struct s_box	box;
 }	t_fol;
 
 void	mandelflood(int start_x, int start_y, int end_x, int end_y, t_fol *f);
+int	juliacalc_and_color(int x, int y, t_fol *f);
+int	juliacalc_and_color_static(int x, int y, t_fol *f);
+int	burningshipcalc_and_color(int x, int y, t_fol *f);
+int	burningjuliacalc_and_color(int x, int y, t_fol *f);
 void	error_and_quit(char *error_str);
-void	arg_parser(int argc, char **argv);
+void	arg_parser(int argc, char **argv, t_fol *f);
 void	general_instructions(void);
 void	struct_init(t_fol *f, int argc, char **argv);
 long double scaled_pixel(int pixel, int type, t_fol *f);
