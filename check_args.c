@@ -39,7 +39,7 @@ static int	check_julia_const(char *julia_const_str, int type)
 	return (1);
 }
 
-static int	first_arg_validator(char *s, int argc)
+static int	first_arg_validator(char *s)
 {
 	if ((ft_strcmp(s, ARG_HELP) && ft_strcmp(s, ARG_MANDEL) &&\
 	ft_strcmp(s, ARG_JULIA) && ft_strcmp(s, ARG_BURNINGSHIP) && \
@@ -59,7 +59,7 @@ void	arg_parser(int argc, char **argv, t_fol *f)
 		error_and_quit(TOO_MANY_ARGS);
 	else if (!ft_strcmp(argv[1], ARG_BUDDHA) && argc > 2)
 			error_and_quit(BUDDHA_TOO_MANY_ARG);
-	else if (argc < 4 && !first_arg_validator(argv[1], argc))
+	else if (argc < 4 && !first_arg_validator(argv[1]))
 		error_and_quit(WRONG_ARG);
 	else if (argc > 2 && (!ft_strcmp(argv[1], ARG_JULIA) || \
 	!ft_strcmp(argv[1], ARG_BURNINGJULIA)))
@@ -67,7 +67,7 @@ void	arg_parser(int argc, char **argv, t_fol *f)
 		ft_printf("argc : %d\n", argc);
 		if (argc == 3)
 			error_and_quit(TOO_FEW_CONSTS);
-		else if (argc == 4 && !check_julia_const(argv[2], 'x') || \
+		else if ((argc == 4 && !check_julia_const(argv[2], 'x')) || \
 		!check_julia_const(argv[3], 'y'))
 			error_and_quit(ERR_JULIA_CONST);
 		f->julia_has_consts = 1;

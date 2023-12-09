@@ -100,7 +100,7 @@ typedef struct s_fol
 }	t_fol;
 
 void	mandelflood(t_box box, t_fol *f);
-int	mandelcalc_and_color(int a, int b, t_fol *f);
+t_scaled_pixel mandelcalc_and_color(int a, int b, t_fol *f);
 int	juliacalc_and_color(int x, int y, t_fol *f);
 int	juliacalc_and_color_static(int x, int y, t_fol *f);
 int	burningshipcalc_and_color(int x, int y, t_fol *f);
@@ -108,10 +108,21 @@ int	burningjuliacalc_and_color(int x, int y, t_fol *f);
 void	error_and_quit(char *error_str);
 void	arg_parser(int argc, char **argv, t_fol *f);
 void	general_instructions(void);
-void	struct_init(t_fol *f, int argc, char **argv);
+void	struct_init(t_fol *f, char **argv);
 long double scaled_pixel(int pixel, int type, t_fol *f);
 void	keys_actions(void *fol);
 void	fractalise(t_fol *f);
-uint32_t starrynight_palette(int iteration, t_fol *f);
 
+uint32_t starrynight_palette(t_scaled_pixel p, t_fol *f);
+
+
+t_scaled_pixel	compute_fractal(int x, int y, t_fol *f);
+void	bruteforce(t_box box, int x, int y, t_fol *f);
+void	calloc_itermap(t_fol *f);
+void	free_itermap(t_fol *f);
+
+void	choose_colors(t_fol *f);
+void	choose_color1(t_fol *f);
+void	choose_color2(t_fol *f);
+void	choose_color3(t_fol *f);
 #endif

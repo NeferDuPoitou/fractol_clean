@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 	if (argc == 1)
 		general_instructions();
 	arg_parser(argc, argv, &f);
-	struct_init(&f, argc, argv);
+	struct_init(&f, argv);
 	init_mlx_and_image(f, &mlx, &image);
 	f.mlx = mlx;
 	f.image = image;

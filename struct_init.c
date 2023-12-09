@@ -18,7 +18,7 @@ static int	get_fractal_type(char *s)
 	return (0);
 }
 
-void	struct_init(t_fol *f, int argc, char **argv)
+void	struct_init(t_fol *f, char **argv)
 {
 	f->fractal_type = get_fractal_type(argv[1]);
 	f->wid = 1.5;

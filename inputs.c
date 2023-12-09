@@ -43,9 +43,12 @@ static void	pan(t_fol *f)
 	}
 }
 
-void	choose_color(t_fol *f)
+void	choose_colors(t_fol *f)
 {
-
+	(void)f;
+	/* choose_color1(f);
+	choose_color2(f);
+	choose_color3(f); */
 }
 
 void	burningjulia_consts(t_fol *f)
@@ -78,6 +81,6 @@ void	keys_actions(void *fol)
 		mlx_close_window(f->mlx);
 	zoom(f);
 	pan(f);
-	choose_color(f);
+	choose_colors(f);
 	burningjulia_consts(f);
 }
