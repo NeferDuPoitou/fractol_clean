@@ -93,6 +93,13 @@ typedef struct s_buddha
 	int		j;
 }	t_buddha;
 
+typedef struct s_buddha_color
+{
+	int color[3];
+	int start_color[3];
+	int end_color[3];
+}	t_buddha_color;
+
 typedef struct s_fol
 {
 	mlx_t			*mlx;
@@ -160,4 +167,6 @@ void	input_iterations(t_fol *f);
 void	keybinds_instructions(void);
 
 void	mlx_wait(double seconds, t_fol *f);
+
+void	buddhabrot(t_fol *f);
 #endif

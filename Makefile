@@ -17,6 +17,7 @@ SRC =  fractol.c \
 	   choose_colors.c \
 	   get_color_palette.c \
 	   mlx_utils.c \
+	   buddhabrot.c \
 	   struct_init.c
 
 OBJDIR = objs

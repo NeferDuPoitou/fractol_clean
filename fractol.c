@@ -45,8 +45,13 @@ void	fractalise(t_fol *f)
 {
 	t_box	box;
 
-	box = (t_box){0, 0, f->win_width - 1, f->win_heigth - 1};
-	mandelflood(box, f);
+	if (f->fractal_type == BUDDHA)
+		buddhabrot(f);
+	else
+	{
+		box = (t_box){0, 0, f->win_width - 1, f->win_heigth - 1};
+		mandelflood(box, f);
+	}
 }
 
 int main(int argc, char **argv)

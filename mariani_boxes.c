@@ -152,8 +152,4 @@ void	mandelflood(t_box box, t_fol *f)
 		bruteforce(box, 0, 0, f);
 		free_itermap(f);
 	}
-	else if (BUDDHA == 1)
-	{
-		//buddhabrot
-	}
 }
