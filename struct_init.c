@@ -48,7 +48,7 @@ void	struct_init(t_fol *f, char **argv)
 	f->buddha_iters = 1000;
 	f->julia_set = 0;
 	f->cur_color = LSD;
-	f->bruteforce = 1;
+	f->bruteforce = 0;
 	if (f->julia_has_consts == 1)
 	{
 		f->j_consts_static.re = atof(argv[2]);

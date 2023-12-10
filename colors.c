@@ -108,8 +108,8 @@ uint32_t	vandetta_palette(t_scaled_pixel spx, t_fol *f)
 	rgb.r = (hsv.Rs + hsv.m) * 255;
 	rgb.g = (hsv.Gs + hsv.m) * 255;
 	rgb.b = (hsv.Bs + hsv.m) * 255;
-	final_color = (uint32_t)rgb.r << 24 | \
-	(uint32_t)rgb.g << 16 | (uint32_t)rgb.b << 8 | 255;
+	final_color = (uint32_t)rgb.r<< 24 | \
+	(uint32_t)(rgb.g) << 16 | (uint32_t)rgb.b << 8 | 255;
 	return (final_color);
 }
 

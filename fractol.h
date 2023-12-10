@@ -133,9 +133,6 @@ long double	scaled_pixel(int pixel, int type, t_fol *f);
 void		keys_actions(void *fol);
 void		fractalise(t_fol *f);
 
-uint32_t	starrynight_palette(t_scaled_pixel p, t_fol *f);
-
-
 t_scaled_pixel	compute_fractal(int x, int y, t_fol *f);
 void		bruteforce(t_box box, int x, int y, t_fol *f);
 void		calloc_itermap(t_fol *f);
@@ -152,7 +149,15 @@ uint32_t	lsd_palette(t_scaled_pixel spx, t_fol *f);
 uint32_t	vandetta_palette(t_scaled_pixel spx, t_fol *f);
 uint32_t	museum_palette(t_scaled_pixel spx, t_fol *f);
 uint32_t	arrows_palette(t_scaled_pixel spx, t_fol *f);
+uint32_t	starrynight_palette(t_scaled_pixel spx, t_fol *f);
+uint32_t	red_dawn_palette(t_scaled_pixel spx, t_fol *f);
+uint32_t	greenery_palette(t_scaled_pixel spx, t_fol *f);
 
+
+void	input_check_bruteforce(t_fol *f);
+void	input_iterations(t_fol *f);
+
+void	keybinds_instructions(void);
 
 void	mlx_wait(double seconds, t_fol *f);
 #endif

@@ -50,6 +50,11 @@ void	choose_color2(t_fol *f)
 		f->cur_color = ARROWS;
 		fractalise(f);
 	}
+	if (mlx_is_key_down(f->mlx, MLX_KEY_6))
+	{
+		f->cur_color = GREENERY;
+		fractalise(f);
+	}
 }
 
 /* void	choose_colors3(t_fol *f)

@@ -9,6 +9,7 @@ SRC =  fractol.c \
 	   colors2.c \
 	   error.c \
 	   inputs.c \
+	   inputs2.c \
 	   instructions.c \
 	   julia.c \
 	   mandelbrot.c \

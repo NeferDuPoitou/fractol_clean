@@ -27,6 +27,7 @@
 # define RAZER 3
 # define MUSEUM 4
 # define ARROWS 5
+# define GREENERY 6
 
 # define R 0
 # define G 1
@@ -43,6 +44,7 @@
 # define BUDDHA 4
 
 # define ARG_HELP "-h"
+# define ARG_CTRL "-c"
 # define ARG_MANDEL "mandelbrot"
 # define ARG_JULIA "julia"
 # define ARG_BURNINGSHIP "burningship"

@@ -91,15 +91,8 @@ void	keys_actions(void *fol)
 	}
 	if (mlx_is_key_down(f->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(f->mlx);
-	if (mlx_is_key_down(f->mlx, MLX_KEY_P))
-	{
-		if (f->bruteforce == 1)
-			f->bruteforce = 0;
-		else
-			f->bruteforce = 1;
-		mlx_wait(0.5, f);
-		printf("burteforce : %d\n", f->bruteforce);
-	}
+	input_check_bruteforce(f);
+	input_iterations(f);
 	zoom(f);
 	pan(f);
 	choose_colors(f);

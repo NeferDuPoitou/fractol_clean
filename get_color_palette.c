@@ -11,12 +11,12 @@ uint32_t	get_color(t_scaled_pixel spx, t_fol *f)
 		return (museum_palette(spx, f));
 	if (f->cur_color == ARROWS)
 		return (arrows_palette(spx, f));
-	// if (f->cur_color == LSD)
-	// 	return (lsd_palette(spx, f));
-	// if (f->cur_color == LSD)
-	// 	return (lsd_palette(spx, f));
-	// if (f->cur_color == LSD)
-	// 	return (lsd_palette(spx, f));
+	if (f->cur_color == STARRYNIGHT)
+		return (starrynight_palette(spx, f));
+	if (f->cur_color == RAZER)
+		return (red_dawn_palette(spx, f));
+	if (f->cur_color == GREENERY)
+		return (greenery_palette(spx, f));
 	// if (f->cur_color == LSD)
 	// 	return (lsd_palette(spx, f));
 	// if (f->cur_color == LSD)
@@ -24,5 +24,5 @@ uint32_t	get_color(t_scaled_pixel spx, t_fol *f)
 	// if (f->cur_color == LSD)
 	// 	return (lsd_palette(spx, f));
 	else
-		return 0;;
+		return 0;
 }

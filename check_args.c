@@ -53,8 +53,10 @@ void	arg_parser(int argc, char **argv, t_fol *f)
 {
 	if (argc == 1)
 		error_and_quit(NO_ARG);
-	else if (argc == 2 && !ft_strcmp(argv[1], ARG_HELP))
+	else if (argc == 2 && (!ft_strcmp(argv[1], ARG_HELP)))
 		general_instructions();
+	else if (argc == 2 && (!ft_strcmp(argv[1], ARG_CTRL)))
+		keybinds_instructions();
 	else if (argc > 4)
 		error_and_quit(TOO_MANY_ARGS);
 	else if (!ft_strcmp(argv[1], ARG_BUDDHA) && argc > 2)
