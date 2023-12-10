@@ -101,10 +101,10 @@ typedef struct s_fol
 
 void	mandelflood(t_box box, t_fol *f);
 t_scaled_pixel mandelcalc_and_color(int a, int b, t_fol *f);
-int	juliacalc_and_color(int x, int y, t_fol *f);
-int	juliacalc_and_color_static(int x, int y, t_fol *f);
-int	burningshipcalc_and_color(int x, int y, t_fol *f);
-int	burningjuliacalc_and_color(int x, int y, t_fol *f);
+t_scaled_pixel	juliacalc_and_color(int x, int y, t_fol *f);
+t_scaled_pixel	juliacalc_and_color_static(int x, int y, t_fol *f);
+t_scaled_pixel	burningshipcalc_and_color(int x, int y, t_fol *f);
+t_scaled_pixel	burningjuliacalc_and_color(int x, int y, t_fol *f);
 void	error_and_quit(char *error_str);
 void	arg_parser(int argc, char **argv, t_fol *f);
 void	general_instructions(void);

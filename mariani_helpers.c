@@ -5,18 +5,23 @@
 
 t_scaled_pixel	compute_fractal(int x, int y, t_fol *f)
 {
-	// if (f->fractal_type == MANDELBROT)
+	if (f->fractal_type == MANDELBROT)
 		return 	mandelcalc_and_color(x, y, f);
-	// if (f->fractal_type == JULIA && f->julia_has_consts == 0)
-	// 	return 	juliacalc_and_color(x, y, f);
-	// if (f->fractal_type == JULIA && f->julia_has_consts == 1)
-	// 	return 	juliacalc_and_color_static(x, y, f);
-	// if (f->fractal_type == BURNINGSHIP)
-	// 	return 	burningshipcalc_and_color(x, y, f);
-	// if (f->fractal_type == BURNINGJULIA)
-	// 	return 	burningjuliacalc_and_color(x, y, f);
+	if (f->fractal_type == JULIA && f->julia_has_consts == 0)
+		return 	juliacalc_and_color(x, y, f);
+	if (f->fractal_type == JULIA && f->julia_has_consts == 1)
+		return 	juliacalc_and_color_static(x, y, f);
+	if (f->fractal_type == BURNINGSHIP)
+		return 	burningshipcalc_and_color(x, y, f);
+	if (f->fractal_type == BURNINGJULIA)
+		return 	burningjuliacalc_and_color(x, y, f);
 	// if (f->fractal_type == BUDDHA)
 		// return 	burningjulia_and_color(x, y, f);
+	else
+	{
+		t_scaled_pixel lol;
+		return lol;
+	}
 	// return ;
 }
 

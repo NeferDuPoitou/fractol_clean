@@ -12,9 +12,9 @@ t_scaled_pixel mandelcalc_and_color(int a, int b, t_fol *f)
 
 	spx.re = scaled_pixel(a, 'x', f);
 	spx.im = scaled_pixel(b, 'y', f);
+	spx.iteration = f->itermap[a][b];
 	if (f->itermap[a][b] != 0)
 			return spx;
-			// return f->itermap[a][b];
 	spx.iteration = 0;
 	z.re = 0;
 	z.im = 0;
