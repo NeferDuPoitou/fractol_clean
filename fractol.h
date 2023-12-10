@@ -26,6 +26,25 @@
 # include "libft.h"
 #include "ft_printf.h"
 
+typedef struct s_hsv 
+{
+	double	hue;
+	double	saturation;
+	double	value;
+	double	C;
+	double	X;
+	double	m;
+	double	Rs;
+	double	Gs;
+	double	Bs;
+}	t_hsv;
+
+typedef struct s_rgb
+{
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+}	t_rgb;
 
 typedef struct s_cpx
 {
@@ -56,8 +75,8 @@ typedef struct s_box
 
 typedef struct s_itercheck
 {
-	int startiter;
-	int flagok;
+	int	startiter;
+	int	flagok;
 }	t_itercheck;
 
 typedef struct s_it
@@ -76,53 +95,64 @@ typedef struct s_buddha
 
 typedef struct s_fol
 {
-	mlx_t		*mlx;
-	mlx_image_t	*image;
-	uint8_t		fractal_type;	
-	uint32_t	win_width;
-	uint32_t	win_heigth;
-	long double	heig;
-	long double	wid;
-	long double	zoom;
-	int32_t		max_iter;
-	int		cur_color;
-	long double	bailout;
-	int		shift;
+	mlx_t			*mlx;
+	mlx_image_t		*image;
+	uint8_t			fractal_type;	
+	uint32_t		win_width;
+	uint32_t		win_heigth;
+	long double		heig;
+	long double		wid;
+	long double		zoom;
+	int32_t			max_iter;
+	int			cur_color;
+	long double		bailout;
+	int			shift;
 	struct s_scaled_pixel	scaled_pixel;
-	struct s_buddha	buddha;
-	int		buddha_iters;
-	int		buddha_bailout;
-	int		julia_has_consts;
-	t_cpx		j_consts;
-	t_cpx		j_consts_static;
-	int		julia_set;
-	int		**itermap;
+	struct s_buddha		buddha;
+	int			buddha_iters;
+	int			buddha_bailout;
+	int			julia_has_consts;
+	t_cpx			j_consts;
+	t_cpx			j_consts_static;
+	int			julia_set;
+	int			bruteforce;
+	int			**itermap;
 }	t_fol;
 
-void	mandelflood(t_box box, t_fol *f);
-t_scaled_pixel mandelcalc_and_color(int a, int b, t_fol *f);
+void		mandelflood(t_box box, t_fol *f);
+t_scaled_pixel	mandelcalc_and_color(int a, int b, t_fol *f);
 t_scaled_pixel	juliacalc_and_color(int x, int y, t_fol *f);
 t_scaled_pixel	juliacalc_and_color_static(int x, int y, t_fol *f);
 t_scaled_pixel	burningshipcalc_and_color(int x, int y, t_fol *f);
 t_scaled_pixel	burningjuliacalc_and_color(int x, int y, t_fol *f);
-void	error_and_quit(char *error_str);
-void	arg_parser(int argc, char **argv, t_fol *f);
-void	general_instructions(void);
-void	struct_init(t_fol *f, char **argv);
-long double scaled_pixel(int pixel, int type, t_fol *f);
-void	keys_actions(void *fol);
-void	fractalise(t_fol *f);
+void		error_and_quit(char *error_str);
+void		arg_parser(int argc, char **argv, t_fol *f);
+void		general_instructions(void);
+void		struct_init(t_fol *f, char **argv);
+long double	scaled_pixel(int pixel, int type, t_fol *f);
+void		keys_actions(void *fol);
+void		fractalise(t_fol *f);
 
-uint32_t starrynight_palette(t_scaled_pixel p, t_fol *f);
+uint32_t	starrynight_palette(t_scaled_pixel p, t_fol *f);
 
 
 t_scaled_pixel	compute_fractal(int x, int y, t_fol *f);
-void	bruteforce(t_box box, int x, int y, t_fol *f);
-void	calloc_itermap(t_fol *f);
-void	free_itermap(t_fol *f);
+void		bruteforce(t_box box, int x, int y, t_fol *f);
+void		calloc_itermap(t_fol *f);
+void		free_itermap(t_fol *f);
 
-void	choose_colors(t_fol *f);
-void	choose_color1(t_fol *f);
-void	choose_color2(t_fol *f);
-void	choose_color3(t_fol *f);
+void		choose_colors(t_fol *f);
+void		choose_color1(t_fol *f);
+void		choose_color2(t_fol *f);
+void		choose_color3(t_fol *f);
+
+uint32_t	get_color(t_scaled_pixel spx, t_fol *f);
+
+uint32_t	lsd_palette(t_scaled_pixel spx, t_fol *f);
+uint32_t	vandetta_palette(t_scaled_pixel spx, t_fol *f);
+uint32_t	museum_palette(t_scaled_pixel spx, t_fol *f);
+uint32_t	arrows_palette(t_scaled_pixel spx, t_fol *f);
+
+
+void	mlx_wait(double seconds, t_fol *f);
 #endif

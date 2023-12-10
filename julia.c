@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   julia.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achatzit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 10:54:31 by achatzit          #+#    #+#             */
+/*   Updated: 2023/12/10 10:54:34 by achatzit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 #include "defines.h"
 
 t_scaled_pixel	juliacalc_and_color(int a, int b, t_fol *f)
 {
-	t_cpx z;
-	long double retmp;
+	t_cpx			z;
+	long double		retmp;
 	t_scaled_pixel	spx;
-	int color;
+	int				color;
 
 	spx.re = scaled_pixel(a, 'x', f);
 	spx.im = scaled_pixel(b, 'y', f);
@@ -24,18 +36,18 @@ t_scaled_pixel	juliacalc_and_color(int a, int b, t_fol *f)
 		spx.iteration++;
 	}
 	f->itermap[a][b] = spx.iteration;
-	color = starrynight_palette(spx, f);
+	spx = (t_scaled_pixel){z.re, z.im};
+	color = get_color(spx, f);
 	mlx_put_pixel(f->image, a, b, color);
-	return spx;
+	return (spx);
 }
-
 
 t_scaled_pixel	juliacalc_and_color_static(int a, int b, t_fol *f)
 {
-	t_cpx z;
-	long double retmp;
+	t_cpx			z;
+	long double		retmp;
 	t_scaled_pixel	spx;
-	int color;
+	int				color;
 
 	spx.re = scaled_pixel(a, 'x', f);
 	spx.im = scaled_pixel(b, 'y', f);
@@ -53,7 +65,7 @@ t_scaled_pixel	juliacalc_and_color_static(int a, int b, t_fol *f)
 		spx.iteration++;
 	}
 	f->itermap[a][b] = spx.iteration;
-	color = starrynight_palette(spx, f);
+	color = get_color(spx, f);
 	mlx_put_pixel(f->image, a, b, color);
-	return spx;
+	return (spx);
 }

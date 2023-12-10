@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   inputs.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achatzit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 10:54:49 by achatzit          #+#    #+#             */
+/*   Updated: 2023/12/10 10:54:51 by achatzit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "MLX42.h"
 #include "fractol.h"
 #include "defines.h"
@@ -46,9 +58,9 @@ static void	pan(t_fol *f)
 void	choose_colors(t_fol *f)
 {
 	(void)f;
-	/* choose_color1(f);
+	choose_color1(f);
 	choose_color2(f);
-	choose_color3(f); */
+	// choose_color3(f); 
 }
 
 void	burningjulia_consts(t_fol *f)
@@ -79,6 +91,15 @@ void	keys_actions(void *fol)
 	}
 	if (mlx_is_key_down(f->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(f->mlx);
+	if (mlx_is_key_down(f->mlx, MLX_KEY_P))
+	{
+		if (f->bruteforce == 1)
+			f->bruteforce = 0;
+		else
+			f->bruteforce = 1;
+		mlx_wait(0.5, f);
+		printf("burteforce : %d\n", f->bruteforce);
+	}
 	zoom(f);
 	pan(f);
 	choose_colors(f);

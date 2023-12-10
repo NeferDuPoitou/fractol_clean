@@ -75,7 +75,7 @@ void	fill_box(t_box box, t_fol *f, t_pixel p, t_itercheck ic)
 	spx = (t_scaled_pixel){scaled_pixel(p.x, 'x', f),\
 						   scaled_pixel(p.y, 'y', f),\
 						   ic.startiter};
-	color = starrynight_palette(spx, f);
+	color = get_color(spx, f);
 	while (++p.x < box.end_x)
 	{
 		p.y = box.start_y;
@@ -112,11 +112,13 @@ void	mandelboxes(t_box box, t_fol *f, int quadrant)
 {
 	t_itercheck	ic;
 	t_pixel		p;
+	t_scaled_pixel	spx;
 
 	divide_boxes(&box, quadrant);
 	ic.flagok = 1;
 	p.x = box.start_x;
-	ic.startiter = compute_fractal(box.start_x, box.start_y, f).iteration;
+	spx = compute_fractal(box.start_x, box.start_y, f);
+	ic.startiter = spx.iteration;
 	if (abs(box.end_x - box.start_x) <= 3 || abs(box.start_y - box.end_y) <= 3)
 	{
 		if (!p.y)
@@ -138,7 +140,20 @@ void	mandelboxes(t_box box, t_fol *f, int quadrant)
 
 void	mandelflood(t_box box, t_fol *f)
 {
-	calloc_itermap(f);
-	mandelboxes(box, f, WHOLE_SCREEN);
-	free_itermap(f);
+	if (f->bruteforce == 0 && f->fractal_type != BUDDHA)
+	{
+		calloc_itermap(f);
+		mandelboxes(box, f, WHOLE_SCREEN);
+		free_itermap(f);
+	}
+	else if (f->bruteforce == 1)
+	{
+		calloc_itermap(f);
+		bruteforce(box, 0, 0, f);
+		free_itermap(f);
+	}
+	else if (BUDDHA == 1)
+	{
+		//buddhabrot
+	}
 }

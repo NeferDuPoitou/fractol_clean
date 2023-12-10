@@ -1,46 +1,3 @@
-# NAME = fractol
-# SRC =  fractol.c	\
-# 	   mariani_boxes.c	\
-# 	   burningjulia.c	\
-# 	   burningship.c	\
-# 	   check_args.c	\
-# 	   colors.c	\
-# 	   error.c	\
-# 	   inputs.c	\
-# 	   instructions.c	\
-# 	   julia.c	\
-# 	   mandelbrot.c	\
-# 	   pixel_scaling.c	\
-# 	   struct_init.c	\
-#
-# OBJDIR = objs
-# OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
-# CC = gcc
-# CFLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address -g3
-# LIBS = libft.a libftprintf.a libmlx42.a
-# RM = rm -rf
-#
-# $(NAME): $(OBJS)
-# 	$(CC) $(LIBS) $(CFLAGS)  -o $(NAME)  $(OBJS)
-#
-# $(OBJDIR)/%.o: %.c
-# 	@mkdir -p $(@D)
-# 	$(CC) $(CFLAGS) -c $^ -o $@
-#
-# all: $(NAME)
-#
-# bonus: $(NAME)
-#
-# clean:
-# 	$(RM) $(OBJDIR)
-#
-# fclean: clean
-# 	$(RM) $(NAME) $(NAME2)
-#
-# re: fclean all
-#
-# .phony: all clean fclean bonus debug
-
 NAME = fractol
 SRC =  fractol.c \
 	   mariani_boxes.c \
@@ -49,6 +6,7 @@ SRC =  fractol.c \
 	   burningship.c \
 	   check_args.c \
 	   colors.c \
+	   colors2.c \
 	   error.c \
 	   inputs.c \
 	   instructions.c \
@@ -56,13 +14,15 @@ SRC =  fractol.c \
 	   mandelbrot.c \
 	   pixel_scaling.c \
 	   choose_colors.c \
+	   get_color_palette.c \
+	   mlx_utils.c \
 	   struct_init.c
 
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address -g3 -I./MLX42/include/MLX42
-LIBS = libft.a libftprintf.a libmlx42.a -lglfw
+CFLAGS = -O3 -fsanitize=address -g3 -I./MLX42/include/MLX42
+LIBS = libft.a libftprintf.a libmlx42.a -lglfw -pthread -lm
 RM = rm -rf
 
 $(NAME): $(OBJS)

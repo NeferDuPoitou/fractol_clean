@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_init.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achatzit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 10:53:47 by achatzit          #+#    #+#             */
+/*   Updated: 2023/12/10 10:53:48 by achatzit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "MLX42.h"
 #include "fractol.h"
 #include "defines.h"
@@ -35,6 +47,8 @@ void	struct_init(t_fol *f, char **argv)
 	f->buddha.j = 0;
 	f->buddha_iters = 1000;
 	f->julia_set = 0;
+	f->cur_color = LSD;
+	f->bruteforce = 1;
 	if (f->julia_has_consts == 1)
 	{
 		f->j_consts_static.re = atof(argv[2]);

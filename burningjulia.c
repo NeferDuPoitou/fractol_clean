@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   burningjulia.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achatzit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 10:52:40 by achatzit          #+#    #+#             */
+/*   Updated: 2023/12/10 10:52:41 by achatzit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "MLX42.h"
 #include "fractol.h"
 #include "defines.h"
@@ -25,7 +37,7 @@ t_scaled_pixel	burningjuliacalc_and_color(int a, int b, t_fol *f)
 		spx.iteration++;
 	}
 	f->itermap[a][b] = spx.iteration;
-	color = starrynight_palette(spx, f);
+	color = get_color(spx, f);
 	mlx_put_pixel(f->image, a, b, color);
 	return (spx);
 }

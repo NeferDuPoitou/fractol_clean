@@ -19,7 +19,7 @@
 
 static int	check_julia_const(char *julia_const_str, int type)
 {
-	float julia_const ;
+	float	julia_const;
 
 	if (!ft_isdigit(julia_const_str[0]) && (julia_const_str[0] != '+' \
 	&& julia_const_str[0] != '-' && julia_const_str[0] != '.'))
@@ -41,7 +41,7 @@ static int	check_julia_const(char *julia_const_str, int type)
 
 static int	first_arg_validator(char *s)
 {
-	if ((ft_strcmp(s, ARG_HELP) && ft_strcmp(s, ARG_MANDEL) &&\
+	if ((ft_strcmp(s, ARG_HELP) && ft_strcmp(s, ARG_MANDEL) && \
 	ft_strcmp(s, ARG_JULIA) && ft_strcmp(s, ARG_BURNINGSHIP) && \
 	ft_strcmp(s, ARG_BURNINGJULIA) && \
 	ft_strcmp(s, ARG_BUDDHA)))
@@ -58,7 +58,7 @@ void	arg_parser(int argc, char **argv, t_fol *f)
 	else if (argc > 4)
 		error_and_quit(TOO_MANY_ARGS);
 	else if (!ft_strcmp(argv[1], ARG_BUDDHA) && argc > 2)
-			error_and_quit(BUDDHA_TOO_MANY_ARG);
+		error_and_quit(BUDDHA_TOO_MANY_ARG);
 	else if (argc < 4 && !first_arg_validator(argv[1]))
 		error_and_quit(WRONG_ARG);
 	else if (argc > 2 && (!ft_strcmp(argv[1], ARG_JULIA) || \

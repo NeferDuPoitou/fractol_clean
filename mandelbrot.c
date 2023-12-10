@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achatzit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/10 10:52:27 by achatzit          #+#    #+#             */
+/*   Updated: 2023/12/10 10:52:28 by achatzit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "MLX42.h"
 #include "fractol.h"
 #include "defines.h"
 #include "libft.h"
 
-t_scaled_pixel mandelcalc_and_color(int a, int b, t_fol *f)
+t_scaled_pixel	mandelcalc_and_color(int a, int b, t_fol *f)
 {
 	t_cpx			z;
 	long double		retmp;
@@ -14,7 +26,7 @@ t_scaled_pixel mandelcalc_and_color(int a, int b, t_fol *f)
 	spx.im = scaled_pixel(b, 'y', f);
 	spx.iteration = f->itermap[a][b];
 	if (f->itermap[a][b] != 0)
-			return spx;
+		return (spx);
 	spx.iteration = 0;
 	z.re = 0;
 	z.im = 0;
@@ -26,7 +38,8 @@ t_scaled_pixel mandelcalc_and_color(int a, int b, t_fol *f)
 		spx.iteration++;
 	}
 	f->itermap[a][b] = spx.iteration;
-	color = starrynight_palette(spx, f);
+	spx = (t_scaled_pixel){z.re, z.im, f->itermap[a][b]};
+	color = get_color(spx, f);
 	mlx_put_pixel(f->image, a, b, color);
-	return spx;
+	return (spx);
 }
