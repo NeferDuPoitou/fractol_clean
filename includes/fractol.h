@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:31:35 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 15:12:28 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 19:59:07 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdbool.h>
 # include <math.h>
 # include "defines.h"
-# include "../MLX42/include/MLX42/MLX42.h"
-# include "../libft/libft.h"
-# include "../ft_printf.h"
+# include "../libs/MLX42/include/MLX42/MLX42.h"
+# include "../libs/libft/libft.h"
+# include "../libs/ft_printf/ft_printf.h"
 
 typedef struct s_hsv
 {

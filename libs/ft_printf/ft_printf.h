@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 11:56:57 by Gecko             #+#    #+#             */
-/*   Updated: 2023/12/11 12:39:39 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 20:30:47 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-// pour tests
-# include <stdio.h>
-#include "libft/libft.h"
+#include "../libft/libft.h"
 
 ////////////////////////////////////////
 //           FT_PRINTF                //
@@ -69,11 +67,11 @@ void	print_filler_prefix(t_flags *flags, int local_len, int *len);
 //
 // PUTSTR : PRECISION = -1 : NORMAL PUTSTR BEHAVIOR 
 // OTHERWISE, ONLY PRINTS PRECISION CHARS //
-void	ft_putstr(const char *s, int precision, int *len, t_flags *flags);
-void	ft_putchar(char c, t_flags *flags);
+void	ft_putstr(const char *s, int precision, int *len);
+void	ft_putchar(char c);
 // LIKE A PUTCHAR, BUT TAKES THE LEN AND UPDATES IT //
-void	ft_putchar_len(char c, int *len, t_flags *flags);
-// int		ft_strlen(const char *s);
+void	ft_putchar_len(char c, int *len);
+int		ft_strlien(const char *s);
 
 void	init_flags(t_flags *flags);
 int		format_isvalid(char format);

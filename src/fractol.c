@@ -6,11 +6,11 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:53:33 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 12:47:17 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 20:20:03 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/fractol.h"
+#include "../includes/fractol.h"
 
 static void	init_mlx_and_image(t_fol f, mlx_t **mlx, mlx_image_t **image)
 {
