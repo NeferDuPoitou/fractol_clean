@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:54:49 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 12:58:09 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:21:13 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	keys_actions(void *fol)
 	input_iterations(f);
 	zoom(f);
 	pan(f);
+	mlx_scroll_hook(f->mlx, scroll_func, f);
 	choose_colors(f);
 	burningjulia_consts(f);
 }

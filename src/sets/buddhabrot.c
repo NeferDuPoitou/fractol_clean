@@ -6,11 +6,20 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:52:33 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 13:35:59 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:44:09 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fractol.h"
+
+//The principle of the buddhabrot is as follows : map the path that every pixel
+//take in the complex plane before reaching the iteration limit, and colorise
+//an image based on the number of times a pixel has been stepped on.
+//The classic buddhabrot only cares about the points that are part of the 
+//mandelbrot set, hence the first_pass function used to determine if a point is 
+//part of the set or not.
+//removing that step will yield the anti-buddhabrot, where we map the path
+//of each points that are not part of the set.
 
 int	first_pass(long double x, long double y, t_fol *f)
 {

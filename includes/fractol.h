@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:31:35 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 14:21:28 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:12:28 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,4 +174,5 @@ void			draw_buddha(t_fol *f, t_buddha buddha);
 void			calc_color_and_put_pixel(t_fol *f, t_pixel px, \
 				t_buddha_color bcolor, long double intensity);
 
+void	scroll_func(double xdelta, double ydelta, void *fl);
 #endif

@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:53:47 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 12:46:55 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:11:40 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	struct_init(t_fol *f, char **argv)
 	f->zoom = 1.00;
 	f->scaled_pixel.im = 0.00;
 	f->scaled_pixel.re = 0.00;
-	f->win_width = 800;
-	f->win_heigth = 800;
+	f->win_width = 400;
+	f->win_heigth = 400;
 	f->bailout = 4.0;
 	f->max_iter = 500;
 	f->cur_color = 0;
@@ -49,6 +49,6 @@ void	struct_init(t_fol *f, char **argv)
 	if (f->julia_has_consts == 1)
 	{
 		f->j_consts_static.re = atof(argv[2]);
-		f->j_consts_static.re = atof(argv[3]);
+		f->j_consts_static.im = atof(argv[3]);
 	}
 }
