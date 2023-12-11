@@ -1,79 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atold.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achatzit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 14:40:00 by achatzit          #+#    #+#             */
-/*   Updated: 2023/10/18 14:40:06 by achatzit         ###   ########.fr       */
+/*   Created: 2023/12/11 22:17:58 by achatzit          #+#    #+#             */
+/*   Updated: 2023/12/11 23:10:15 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <math.h>
 
-long double ft_atold(const char *nptr)
+static long double	get_decimal(char *str)
 {
-    int neg = 1;
-    long double ret = 0.0;
+	long double	n;
+	long double	i;
+	long double	sign;
 
-    // Skip leading whitespaces
-    while (ft_isspace((unsigned char)*nptr))
-        nptr++;
+	sign = 1.0;
+	if (*str == '-')
+	{
+		sign = -1.0;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	n = 0.0;
+	i = 10;
+	while (ft_isdigit((int)(*str)))
+	{
+		n += (1 / i) * ((*str) - '0');
+		i *= 10;
+		str++;
+	}
+	return (n * sign);
+}
 
-    // Handle the sign
-    if (*nptr == '-' || *nptr == '+')
-    {
-        neg = (*nptr == '-') ? -1 : 1;
-        nptr++;
-    }
+long double	ft_atold(char *str)
+{
+	long double		n;	
+	long long		left;
 
-    // Process digits before the decimal point
-    while (ft_isdigit((unsigned char)*nptr))
-    {
-        ret = ret * 10.0 + (*nptr - '0');
-        nptr++;
-    }
-
-    // Process digits after the decimal point
-    if (*nptr == '.')
-    {
-        nptr++; // Skip the decimal point
-
-        long double decimalMultiplier = 0.1;
-
-        while (ft_isdigit((unsigned char)*nptr))
-        {
-            ret += (*nptr - '0') * decimalMultiplier;
-            decimalMultiplier *= 0.1;
-            nptr++;
-        }
-    }
-
-    // Handle scientific notation if present
-    if (*nptr == 'e' || *nptr == 'E')
-    {
-        int exponent = 0;
-        nptr++; // Skip 'e' or 'E'
-
-        // Handle the exponent sign
-        if (*nptr == '-' || *nptr == '+')
-        {
-            exponent = (*nptr == '-') ? -1 : 1;
-            nptr++;
-        }
-
-        // Process the exponent digits
-        while (ft_isdigit((unsigned char)*nptr))
-        {
-            exponent = exponent * 10 + (*nptr - '0');
-            nptr++;
-        }
-
-        // Apply the exponent
-        ret *= powl(10.0, exponent);
-    }
-
-    return ret * neg;
+	n = 0.0;
+	left = ft_atoll(str);
+	str++;
+	n += (long double)left;
+	while (ft_isdigit((int)(*str)) && !(*str == '.' || *str == ','))
+		str++;
+	if (*str && (*str == '.' || *str == ','))
+		n += get_decimal((str + 1));
+	return (n);
 }

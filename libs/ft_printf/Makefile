@@ -6,7 +6,7 @@
 #    By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 10:39:52 by Gecko             #+#    #+#              #
-#    Updated: 2023/12/11 20:28:40 by achatzit         ###   ########.fr        #
+#    Updated: 2023/12/11 20:42:54 by achatzit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,18 +54,18 @@ RM = rm -rf
 AR = ar crs
 
 $(NAME): $(OBJS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	@$(CC) $(CFLAGS) -c $^ -o $@
 
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
+	@$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 

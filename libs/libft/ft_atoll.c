@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 22:13:49 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 22:13:51 by achatzit         ###   ########.fr       */
+/*   Created: 2023/12/11 22:16:55 by achatzit          #+#    #+#             */
+/*   Updated: 2023/12/11 23:07:52 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+long long	ft_atoll(char *nptr)
 {
-	while (*s1 && *s2)
+	long long	result;
+	int			sign;
+
+	result = 0;
+	sign = 1;
+	while (*nptr == 32 || (*nptr >= 9 && *nptr <= 13))
+		nptr++;
+	if (*nptr == '-')
 	{
-		if (*s1 != *s2)
-			return (*s1 - *s2);
-		s1++;
-		s2++;
+		sign = -1;
+		nptr++;
 	}
-	return (*s1 - *s2);
+	else if (*nptr == '+')
+		nptr++;
+	while (*nptr && *nptr >= 48 && *nptr <= 57)
+	{
+		result *= 10;
+		result += sign * (*nptr++ - 48);
+	}
+	return (result);
 }

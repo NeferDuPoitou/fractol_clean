@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:53:47 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 18:11:40 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:25:34 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	struct_init(t_fol *f, char **argv)
 	f->cur_color = 0;
 	f->buddha.i = 0;
 	f->buddha.j = 0;
-	f->buddha_iters = 1000;
+	f->buddha_iters = 5000;
 	f->julia_set = 0;
 	f->cur_color = LSD;
 	f->bruteforce = 0;
 	if (f->julia_has_consts == 1)
 	{
-		f->j_consts_static.re = atof(argv[2]);
-		f->j_consts_static.im = atof(argv[3]);
+		f->j_consts_static.re = ft_atold(argv[2]);
+		f->j_consts_static.im = ft_atold(argv[3]);
 	}
 }

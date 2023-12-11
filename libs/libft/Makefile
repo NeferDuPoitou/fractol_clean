@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Gecko <Gecko@chezmoi.fr>                   +#+  +:+       +#+         #
+#    By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 10:39:52 by Gecko             #+#    #+#              #
-#    Updated: 2023/08/06 17:52:47 by Gecko            ###   ########.fr        #
+#    Updated: 2023/12/11 22:18:26 by achatzit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = libft.a
 
 SRC	=	ft_atoi.c		\
 		ft_atold.c		\
+		ft_atoll.c		\
 		ft_bzero.c		\
 		ft_calloc.c		\
 		ft_isalnum.c	\
@@ -70,18 +71,18 @@ RM = rm -rf
 AR = ar crs
 
 $(NAME): $(OBJS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	@$(CC) $(CFLAGS) -c $^ -o $@
 
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
+	@$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean:	clean
-	$(RM) $(NAME)		
+	@$(RM) $(NAME)		
 
 re:	fclean all
 

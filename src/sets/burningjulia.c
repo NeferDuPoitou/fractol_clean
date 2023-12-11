@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:52:40 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 12:45:34 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 20:58:10 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_scaled_pixel	burningjuliacalc_and_color(int a, int b, t_fol *f)
 		spx.iteration++;
 	}
 	f->itermap[a][b] = spx.iteration;
+	spx = (t_scaled_pixel){z.re, z.im, f->itermap[a][b]};
 	color = get_color(spx, f);
 	mlx_put_pixel(f->image, a, b, color);
 	return (spx);

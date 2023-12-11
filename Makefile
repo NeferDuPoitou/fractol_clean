@@ -11,6 +11,7 @@ SRC =  src/fractol.c \
 	   src/inputs/inputs.c \
 	   src/inputs/inputs2.c \
 	   src/inputs/scroll.c \
+	   src/inputs/resize.c \
 	   src/args/instructions.c \
 	   src/sets/julia.c \
 	   src/sets/mandelbrot.c \
@@ -54,11 +55,11 @@ $(MLX):
 	@$(RM) ./libs/MLX42/Cmakefiles
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $^ -o $@
+	@$(CC) $(CFLAGS) -c $^ -o $@
 
 bonus: all
 
@@ -72,8 +73,8 @@ fclean: clean
 	$(RM) $(MLX)
 	@make -C ./libs/libft/ fclean
 	@make -C ./libs/ft_printf/ fclean
-	rm ./libs/libftprintf.a
-	rm ./libs/libft.a
+	@rm ./libs/libftprintf.a
+	@rm ./libs/libft.a
 
 re: fclean all
 

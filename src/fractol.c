@@ -6,38 +6,11 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:53:33 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 20:20:03 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:10:37 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-
-static void	init_mlx_and_image(t_fol f, mlx_t **mlx, mlx_image_t **image)
-{
-	*mlx = mlx_init(f.win_width, f.win_heigth, "Fractol", true);
-	if (!*mlx)
-	{
-		ft_printf("%s", mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
-	}
-	*image = (mlx_new_image(*mlx, f.win_width, f.win_heigth));
-	if (!*image)
-	{
-		mlx_close_window(*mlx);
-		ft_printf("%s", mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
-	}
-}
-
-static void	image_to_window(mlx_t *mlx, mlx_image_t *image, int x, int y)
-{
-	if (mlx_image_to_window(mlx, image, x, y) == -1)
-	{
-		mlx_close_window(mlx);
-		ft_printf("%s", mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
-	}
-}
 
 void	fractalise(t_fol *f)
 {
@@ -52,11 +25,11 @@ void	fractalise(t_fol *f)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_fol	f;
-	mlx_t	*mlx;
-	mlx_image_t *image;
+	t_fol		f;
+	mlx_t		*mlx;
+	mlx_image_t	*image;
 
 	if (argc == 1)
 		general_instructions();
@@ -69,7 +42,6 @@ int main(int argc, char **argv)
 	fractalise(&f);
 	mlx_loop_hook(mlx, keys_actions, &f);
 	mlx_loop(mlx);
-	
-	//clean exit
-	//return EXIT_SUCCESS
+	mlx_terminate(f.mlx);
+	return (EXIT_SUCCESS);
 }

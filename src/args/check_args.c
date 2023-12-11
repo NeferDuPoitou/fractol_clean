@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:31:07 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 12:42:23 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 23:15:02 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 static int	check_julia_const(char *julia_const_str, int type)
 {
-	float	julia_const;
+	long double	julia_const;
 
 	if (!ft_isdigit(julia_const_str[0]) && (julia_const_str[0] != '+' \
 	&& julia_const_str[0] != '-' && julia_const_str[0] != '.'))
 		error_and_quit(DONT_BREAK);
-	julia_const = atof(julia_const_str);
-	printf("%f\n", julia_const);
+	julia_const = ft_atold(julia_const_str);
 	if (type == 'x')
 	{
 		if ((julia_const > SCALEDX_MAX || julia_const < SCALEDX_MIN))

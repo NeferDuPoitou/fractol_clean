@@ -6,14 +6,13 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:31:35 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 19:59:07 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 22:27:04 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <math.h>
@@ -120,6 +119,8 @@ typedef struct s_fol
 	int						julia_set;
 	int						bruteforce;
 	int						**itermap;
+	int						new_heigth;
+	int						new_width;
 }	t_fol;
 
 void			mandelflood(t_box box, t_fol *f);
@@ -135,6 +136,11 @@ void			struct_init(t_fol *f, char **argv);
 long double		scaled_pixel(int pixel, int type, t_fol *f);
 void			keys_actions(void *fol);
 void			fractalise(t_fol *f);
+
+void			image_to_window(mlx_t *mlx, mlx_image_t *image, int x, int y);
+void	init_mlx_and_image(t_fol f, mlx_t **mlx, mlx_image_t **image);
+void	new_image(t_fol *f);
+void	image_to_window(mlx_t *mlx, mlx_image_t *image, int x, int y);
 
 t_scaled_pixel	compute_fractal(int x, int y, t_fol *f);
 void			bruteforce(t_box box, int x, int y, t_fol *f);
@@ -175,4 +181,8 @@ void			calc_color_and_put_pixel(t_fol *f, t_pixel px, \
 				t_buddha_color bcolor, long double intensity);
 
 void	scroll_func(double xdelta, double ydelta, void *fl);
+
+
+void	resize(int w, int h, void *param);
+void	key_resize(t_fol *f);
 #endif
