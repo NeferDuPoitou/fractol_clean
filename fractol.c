@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achatzit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:53:33 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/10 10:53:34 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 12:47:17 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42.h"
-#include "fractol.h"
-#include "defines.h"
+#include "includes/fractol.h"
 
 static void	init_mlx_and_image(t_fol f, mlx_t **mlx, mlx_image_t **image)
 {

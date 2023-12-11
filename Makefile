@@ -1,29 +1,30 @@
 NAME = fractol
 SRC =  fractol.c \
-	   mariani_boxes.c \
-	   mariani_helpers.c \
-	   burningjulia.c \
-	   burningship.c \
-	   check_args.c \
-	   colors.c \
-	   colors2.c \
-	   error.c \
-	   inputs.c \
-	   inputs2.c \
-	   instructions.c \
-	   julia.c \
-	   mandelbrot.c \
-	   pixel_scaling.c \
-	   choose_colors.c \
-	   get_color_palette.c \
-	   mlx_utils.c \
-	   buddhabrot.c \
-	   struct_init.c
+	   src/shape_checker/mariani_boxes.c \
+	   src/shape_checker/mariani_helpers.c \
+	   src/sets/burningjulia.c \
+	   src/sets/burningship.c \
+	   src/args/check_args.c \
+	   src/colors/colors.c \
+	   src/colors/colors2.c \
+	   src/args/error.c \
+	   src/inputs/inputs.c \
+	   src/inputs/inputs2.c \
+	   src/args/instructions.c \
+	   src/sets/julia.c \
+	   src/sets/mandelbrot.c \
+	   src/utils/pixel_scaling.c \
+	   src/inputs/choose_colors.c \
+	   src/colors/get_color_palette.c \
+	   src/utils/mlx_utils.c \
+	   src/sets/buddhabrot.c \
+	   src/sets/buddhabrot_helpers.c \
+	   src/utils/struct_init.c
 
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 CC = gcc
-CFLAGS = -O3 -fsanitize=address -g3 -I./MLX42/include/MLX42
+CFLAGS = -O3 -Wall -Wextra -Werror -fsanitize=address -g3 -I./MLX42/include/MLX42
 LIBS = libft.a libftprintf.a libmlx42.a -lglfw -pthread -lm
 RM = rm -rf
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gecko <Gecko@chezmoi.fr>                   +#+  +:+       +#+        */
+/*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 11:56:57 by Gecko             #+#    #+#             */
-/*   Updated: 2023/11/02 19:05:59 by Gecko            ###   ########.fr       */
+/*   Updated: 2023/12/11 12:39:39 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdarg.h>
 // pour tests
 # include <stdio.h>
-#include "libft.h"
+#include "libft/libft.h"
 
 ////////////////////////////////////////
 //           FT_PRINTF                //
