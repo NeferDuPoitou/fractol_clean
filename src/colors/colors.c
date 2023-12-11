@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:53:08 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 13:01:38 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:19:03 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static t_hsv	setup_struct(int iteration)
 	hsv.hue = fmod((double)iteration * 10, 360.0);
 	hsv.saturation = 1.0;
 	hsv.value = 1.0;
-	hsv.C = hsv.value * hsv.saturation;
-	hsv.X = hsv.C * (1.0 - fabs(fmod(hsv.hue / 60.0, 2.0) - 1.0));
-	hsv.m = hsv.value - hsv.C;
+	hsv.c = hsv.value * hsv.saturation;
+	hsv.x = hsv.c * (1.0 - fabs(fmod(hsv.hue / 60.0, 2.0) - 1.0));
+	hsv.m = hsv.value - hsv.c;
 	return (hsv);
 }
 
@@ -52,27 +52,27 @@ static void	hue_helper1(t_hsv *hsv)
 {
 	if (hsv->hue >= 0 && hsv->hue < 60)
 	{
-		hsv->Rs = hsv->C;
-		hsv->Gs = hsv->X;
-		hsv->Bs = 0;
+		hsv->rs = hsv->c;
+		hsv->gs = hsv->x;
+		hsv->bs = 0;
 	}
 	else if (hsv->hue >= 60 && hsv->hue < 120)
 	{
-		hsv->Rs = hsv->X;
-		hsv->Gs = hsv->C;
-		hsv->Bs = 0;
+		hsv->rs = hsv->x;
+		hsv->gs = hsv->c;
+		hsv->bs = 0;
 	}
 	else if (hsv->hue >= 120 && hsv->hue < 180)
 	{
-		hsv->Rs = 0;
-		hsv->Gs = hsv->C;
-		hsv->Bs = hsv->X;
+		hsv->rs = 0;
+		hsv->gs = hsv->c;
+		hsv->bs = hsv->x;
 	}
 	else if (hsv->hue >= 180 && hsv->hue < 240)
 	{
-		hsv->Rs = 0;
-		hsv->Gs = hsv->X;
-		hsv->Bs = hsv->C;
+		hsv->rs = 0;
+		hsv->gs = hsv->x;
+		hsv->bs = hsv->c;
 	}
 }
 
@@ -80,15 +80,15 @@ static void	hue_helper2(t_hsv *hsv)
 {
 	if (hsv->hue >= 240 && hsv->hue < 300)
 	{
-		hsv->Rs = hsv->X;
-		hsv->Gs = 0;
-		hsv->Bs = hsv->C;
+		hsv->rs = hsv->x;
+		hsv->gs = 0;
+		hsv->bs = hsv->c;
 	}
 	else if (hsv->hue >= 300)
 	{
-		hsv->Rs = hsv->C;
-		hsv->Gs = 0;
-		hsv->Bs = hsv->X;
+		hsv->rs = hsv->c;
+		hsv->gs = 0;
+		hsv->bs = hsv->x;
 	}
 }
 
@@ -103,9 +103,9 @@ uint32_t	vandetta_palette(t_scaled_pixel spx, t_fol *f)
 	hsv = setup_struct(spx.iteration);
 	hue_helper1(&hsv);
 	hue_helper2(&hsv);
-	rgb.r = (hsv.Rs + hsv.m) * 255;
-	rgb.g = (hsv.Gs + hsv.m) * 255;
-	rgb.b = (hsv.Bs + hsv.m) * 255;
+	rgb.r = (hsv.rs + hsv.m) * 255;
+	rgb.g = (hsv.gs + hsv.m) * 255;
+	rgb.b = (hsv.bs + hsv.m) * 255;
 	final_color = (uint32_t)rgb.r << 24 | \
 	(uint32_t)(rgb.g) << 16 | (uint32_t)rgb.b << 8 | 255;
 	return (final_color);

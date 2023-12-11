@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:52:33 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 13:34:23 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:35:59 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	draw_buddha(t_fol *f, t_buddha buddha)
 	ft_printf("100%%\n");
 }
 
-
 void	calc_color_and_put_pixel(t_fol *f, t_pixel px, t_buddha_color bcolor, \
 								long double intensity)
 {
@@ -108,8 +107,6 @@ void	calc_color_and_put_pixel(t_fol *f, t_pixel px, t_buddha_color bcolor, \
 		| (bcolor.color[2] << 8) | 255;
 	mlx_put_pixel(f->image, px.x, px.y, final);
 }
-
-
 
 void	buddhabrot(t_fol *f)
 {

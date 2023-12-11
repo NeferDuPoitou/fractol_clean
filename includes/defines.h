@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:31:25 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 12:37:39 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:24:48 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # define SCALEDY_MAX  1.00
 # define ABS_SCALED_X 2.00
 # define ABS_SCALED_Y 2.00
-
 
 # define LSD 0
 # define VANDETTA 1
@@ -60,6 +59,8 @@ Use ./fractol -h for help"
 # define DONT_BREAK "It appears that you might be trying to break my program.\
 Good Luck"
 # define BUDDHA_TOO_MANY_ARG "The buddha dont need any superfluous arguments"
+
+# define ALLOC_FAIL "failed allocating memory, better call an exorcist"
 
 // box quadrants
 # define WHOLE_SCREEN 0

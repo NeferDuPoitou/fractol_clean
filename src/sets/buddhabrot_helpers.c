@@ -6,35 +6,48 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:25:44 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 13:33:18 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:33:17 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fractol.h"
 
-void	malloc_buddhaimg(t_buddha *buddha, t_fol *f)
+//here to comply with the Norm. merge with malloc_buddhaimg asap
+static void	mbi_inner_loop(t_buddha *buddha, t_fol *f, int i)
 {
-	uint32_t	i;
 	uint32_t	j;
 	uint32_t	k;
 
+	buddha->img[i] = malloc(f->win_width * sizeof(int *));
+	if (!buddha->img[i])
+		return (error_and_quit(ALLOC_FAIL));
+	j = 0;
+	while (j < f->win_heigth)
+	{
+		buddha->img[i][j] = malloc(f->win_width * sizeof(int));
+		if (!buddha->img[i][j])
+			return (error_and_quit(ALLOC_FAIL));
+		k = 0;
+		while (k < f->win_width)
+		{
+			buddha->img[i][j][k] = 0;
+			k++;
+		}
+		j++;
+	}
+}
+
+void	malloc_buddhaimg(t_buddha *buddha, t_fol *f)
+{
+	uint32_t	i;
+
 	i = 0;
 	buddha->img = malloc(3 * sizeof(int **));
+	if (!buddha->img)
+		return (error_and_quit(ALLOC_FAIL));
 	while (i < 3)
 	{
-		buddha->img[i] = malloc(f->win_width * sizeof(int *));
-		j = 0;
-		while (j < f->win_heigth)
-		{
-			buddha->img[i][j] = malloc(f->win_width * sizeof(int));
-			k = 0;
-			while (k < f->win_width)
-			{
-				buddha->img[i][j][k] = 0;
-				k++;
-			}
-			j++;
-		}
+		mbi_inner_loop(buddha, f, i);
 		i++;
 	}
 }

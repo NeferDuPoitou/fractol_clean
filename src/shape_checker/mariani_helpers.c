@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:54:03 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 13:16:53 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:34:37 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,13 @@ void	calloc_itermap(t_fol *f)
 
 	i = 0;
 	f->itermap = calloc(f->win_width, sizeof(int *));
+	if (!f->itermap)
+		error_and_quit(ALLOC_FAIL);
 	while (i < f->win_width)
 	{
 		f->itermap[i] = calloc(f->win_heigth, sizeof(int));
+		if (!f->itermap[i])
+			error_and_quit(ALLOC_FAIL);
 		i++;
 	}
 }
