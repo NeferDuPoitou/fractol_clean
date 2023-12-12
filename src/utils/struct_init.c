@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:53:47 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 22:25:34 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:29:09 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	struct_init(t_fol *f, char **argv)
 	f->fractal_type = get_fractal_type(argv[1]);
 	f->wid = 1.5;
 	f->heig = 1.2;
-	f->zoom = 1.00;
+	f->zoom = 0.90;
 	f->scaled_pixel.im = 0.00;
 	f->scaled_pixel.re = 0.00;
 	f->win_width = 400;

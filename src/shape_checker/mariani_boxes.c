@@ -6,11 +6,31 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:36:17 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 13:22:32 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:47:03 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fractol.h"
+
+//this algorithm is called Mariani-Silver, or simply shape checking (with boxes)
+//the principle is as follows : there cannot be islands in the mandelbrot set, 
+//and every iteration zone is simply connected.
+//Which means that, if we can draw a close shape where each border pixel
+//share the same iteration count, we can safely assume that every pixel
+//inside the shape will be of the same iteration.
+//Here i recursively divide a box into 4 box, these are my shapes.
+//This improves the base performance to 8* in average, but it can be more or 
+//less the same as bruteforcing depending on the iteration and zoom count.
+//low iteration counts will yeld results closer to the bruteforce approach.
+//
+//Another approach at shape checking would be border tracing, where we 
+//use kind of a flood fill algorithm (but only on the border pixels) 
+//to draw the perfect shape around each iteration zone. this would
+//improve the performance bt around 30 times compared to bruteforcing 
+//(as we only have to iterate on the border pixels, compared to many
+//pixels inside with the Mariani approach), but my first attempt failed
+//miserably at finding a clean condition to check if im still at the border
+//of the shape.
 
 //	T_L= (start_x, start_y, (end_x + start_x) / 2, (end_y + start_y) / 2, f);
 // 	T_R = ((start_x + end_x) / 2, start_y, end_x, (end_y + start_y) / 2, f);

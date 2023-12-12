@@ -39,43 +39,51 @@ all: $(LIBFT) $(PRINTF) $(MLX) $(NAME)
 lft: $(LIBFT)
 
 $(LIBFT):
-	@make -C ./libs/libft/
-	@make -C ./libs/libft/ clean
-	@mv ./libs/libft/libft.a ./libs/
+	@echo "\033[95mBuilding libft\033[0m"
+	@make -s -C ./libft/
+	@make -s -C ./libft/ clean
+	@mv ./libft/libft.a ./libs/
 
 $(PRINTF):
-	@make -C ./libs/ft_printf/
-	@make -C ./libs/ft_printf/ clean
-	@mv ./libs/ft_printf/libftprintf.a ./libs/
+	@echo "\033[93;1mBuilding ft_printf\033[0m"
+	@make -s -C ./ft_printf/
+	@make -s -C ./ft_printf/ clean
+	@mv ./ft_printf/libftprintf.a ./libs/
 
 $(MLX):
-	@cmake ./libs/MLX42/ -B ./libs/MLX42/build && make -C ./libs/MLX42/build -j4
-	@mv ./libs/MLX42/build/libmlx42.a ./libs/
-	@$(RM) ./libs/MLX42/build
-	@$(RM) ./libs/MLX42/Cmakefiles
+	@cmake ./MLX42/ -B ./MLX42/build && make -s -C ./MLX42/build -j4
+	@mv ./MLX42/build/libmlx42.a ./libs/
+	@$(RM) ./MLX42/build
+	@$(RM) ./MLX42/Cmakefiles
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(@D)
+	@printf "\033[93mCompiling $< "
+	@printf "\033[0m\r"
 	@$(CC) $(CFLAGS) -c $^ -o $@
+	@printf "\033[K"
 
 bonus: all
 
+build_msg:
+	@echo "\033[43mBuilding Fractol\033[0m"
+
 clean:
-	$(RM) $(OBJDIR)
-	@make -C ./libs/libft/ clean
-	@make -C ./libs/ft_printf/ clean
+	@$(RM) $(OBJDIR)
+	@make -s -C ./libft/ clean
+	@make -s -C ./ft_printf/ clean
 
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) $(MLX)
-	@make -C ./libs/libft/ fclean
-	@make -C ./libs/ft_printf/ fclean
+	@$(RM) $(NAME)
+	@$(RM) $(MLX)
+	@make -s -C ./libft/ fclean
+	@make -s -C ./ft_printf/ fclean
 	@rm ./libs/libftprintf.a
 	@rm ./libs/libft.a
 
 re: fclean all
 
-.PHONY: all clean fclean bonus llol
+.PHONY: all clean fclean bonus build_msg re

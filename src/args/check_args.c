@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:31:07 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 23:15:02 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/12 09:55:46 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	arg_parser(int argc, char **argv, t_fol *f)
 	else if (argc > 2 && (!ft_strcmp(argv[1], ARG_JULIA) || \
 	!ft_strcmp(argv[1], ARG_BURNINGJULIA)))
 	{
-		ft_printf("argc : %d\n", argc);
 		if (argc == 3)
 			error_and_quit(TOO_FEW_CONSTS);
 		else if ((argc == 4 && !check_julia_const(argv[2], 'x')) || \

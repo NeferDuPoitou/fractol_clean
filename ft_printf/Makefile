@@ -6,7 +6,7 @@
 #    By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 10:39:52 by Gecko             #+#    #+#              #
-#    Updated: 2023/12/11 20:42:54 by achatzit         ###   ########.fr        #
+#    Updated: 2023/12/12 11:16:11 by achatzit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,10 @@ $(NAME): $(OBJS)
 	@$(AR) $@ $^
 
 %.o: %.c
+	@printf "\033[93mCompiling $< "
+	@printf "\033[0m\r"
 	@$(CC) $(CFLAGS) -c $^ -o $@
+	@printf "\033[K"
 
 all: $(NAME)
 

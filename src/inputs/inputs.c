@@ -6,7 +6,7 @@
 /*   By: achatzit <achatzit@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 10:54:49 by achatzit          #+#    #+#             */
-/*   Updated: 2023/12/11 21:39:51 by achatzit         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:26:47 by achatzit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static void	zoom(t_fol *f)
 	}
 	if (mlx_is_key_down(f->mlx, MLX_KEY_K))
 	{
-		f->zoom *= 0.8;
+		f->zoom *= 0.9;
+		f->wid += (0.1 / f->zoom * ((long double)f->win_width / f->win_heigth));
+		f->heig += 0.1 / f->zoom;
 		fractalise(f);
 	}
 }
