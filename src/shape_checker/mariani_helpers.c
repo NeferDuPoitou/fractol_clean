@@ -16,6 +16,7 @@ t_scaled_pixel	compute_fractal(int x, int y, t_fol *f)
 {
 	t_scaled_pixel	werror;
 
+	werror = (t_scaled_pixel){0.00, 0.00, 0};
 	if (f->fractal_type == MANDELBROT)
 		return (mandelcalc_and_color(x, y, f));
 	if (f->fractal_type == JULIA && f->julia_has_consts == 0)

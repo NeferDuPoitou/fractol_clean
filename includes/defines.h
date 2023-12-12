@@ -62,7 +62,7 @@ Good Luck"
 
 # define ALLOC_FAIL "failed allocating memory, better call an exorcist"
 
-#define RESIZE_FAILED "failed to resize the image"
+# define RESIZE_FAILED "failed to resize the image"
 
 // box quadrants
 # define WHOLE_SCREEN 0

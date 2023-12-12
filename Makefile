@@ -1,4 +1,5 @@
 NAME = fractol
+NAMEUNOPTIMIZED = fractol_unoptimized
 SRC =  src/fractol.c \
 	   src/shape_checker/mariani_boxes.c \
 	   src/shape_checker/mariani_helpers.c \
@@ -24,9 +25,12 @@ SRC =  src/fractol.c \
 	   src/utils/struct_init.c
 
 OBJDIR = objs
+OBJDIRUNOPTI = objsunopti
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
+OBJSUNOPTI = $(addprefix $(OBJDIRUNOPTI)/, $(SRC:.c=.o))
 CC = gcc
 CFLAGS = -O3 -Wall -Wextra -Werror -fsanitize=address -g3 -I./MLX42/include/MLX42
+CFLAGSUNOPTI = -Wall -Wextra -Werror -fsanitize=address -g3 -I./MLX42/include/MLX42
 LIBS = ./libs/libft.a ./libs/libftprintf.a ./libs/libmlx42.a -lglfw -pthread -lm
 RM = rm -rf
 
@@ -35,6 +39,8 @@ PRINTF = ./libs/libftprintf.a
 MLX = ./libs/libmlx42.a
 
 all: $(LIBFT) $(PRINTF) $(MLX) $(NAME)
+
+unopti: $(LIBFT) $(PRINTF) $(MLX) $(NAMEUNOPTIMIZED)
 
 lft: $(LIBFT)
 
@@ -59,11 +65,21 @@ $(MLX):
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
+$(NAMEUNOPTIMIZED): $(OBJSUNOPTI)
+	@$(CC) $(CFLAGSUNOPTI) -o $(NAMEUNOPTIMIZED) $(OBJSUNOPTI) $(LIBS)
+
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(@D)
 	@printf "\033[93mCompiling $< "
 	@printf "\033[0m\r"
 	@$(CC) $(CFLAGS) -c $^ -o $@
+	@printf "\033[K"
+
+$(OBJDIRUNOPTI)/%.o: %.c
+	@mkdir -p $(@D)
+	@printf "\033[93mCompiling $< "
+	@printf "\033[0m\r"
+	@$(CC) $(CFLAGSUNOPTI) -c $^ -o $@
 	@printf "\033[K"
 
 bonus: all
@@ -73,11 +89,13 @@ build_msg:
 
 clean:
 	@$(RM) $(OBJDIR)
+	@$(RM) $(OBJDIRUNOPTI)
 	@make -s -C ./libft/ clean
 	@make -s -C ./ft_printf/ clean
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) fractol_unoptimized
 	@$(RM) $(MLX)
 	@make -s -C ./libft/ fclean
 	@make -s -C ./ft_printf/ fclean

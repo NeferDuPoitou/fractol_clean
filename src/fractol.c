@@ -40,7 +40,10 @@ int	main(int argc, char **argv)
 	f.image = image;
 	image_to_window(mlx, image, 0, 0);
 	fractalise(&f);
-	mlx_loop_hook(mlx, keys_actions, &f);
+	if (f.fractal_type != BUDDHA)
+		mlx_loop_hook(mlx, keys_actions, &f);
+	else
+		mlx_loop_hook(mlx, buddha_hook, &f);
 	mlx_loop(mlx);
 	mlx_terminate(f.mlx);
 	return (EXIT_SUCCESS);

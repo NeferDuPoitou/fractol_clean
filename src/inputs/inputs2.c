@@ -53,3 +53,12 @@ void	input_iterations(t_fol *f)
 		fractalise(f);
 	}
 }
+
+void	buddha_hook(void *fol)
+{
+	t_fol	*f;
+
+	f = (t_fol *)fol;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(f->mlx);
+}

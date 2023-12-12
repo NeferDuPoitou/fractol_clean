@@ -31,6 +31,7 @@ M/N : increase/decrease the precision by a little bit\n\
 X/Z : increase/decrease the precision by a lot\n\
 0-9 : switch color palette\n\
 B   : switch from Mariani-Silver algorithm to brute force\n\
-R   : reset the fractal");
+R   : reset the fractal\n\
+P/O : increase/decrease the window size");
 	exit(EXIT_SUCCESS);
 }
